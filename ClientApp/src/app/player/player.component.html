@@ -1,0 +1,12 @@
+
+<ng-container *ngIf="(player$ | async) as player; else loading">
+
+    <h1>{{ player.playerName }}</h1>
+    <div>{{ player.playerWinnings }}</div>
+    <ul>
+      <li>{{ player.country }}</li>
+      <li>{{ player.dateWon }}</li>
+    </ul>
+  
+  </ng-container>
+  <ng-template #loading>Loading…</ng-template>
