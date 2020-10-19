@@ -14,7 +14,7 @@ export class PlayerAddEditComponent implements OnInit {
   actionType: string;
   formPlayerName: string;
   formCountry: string;
-  formPlayerWinnings: number;
+  formPlayerWinnings: string;
   playerId: number;
   errorMessage: any;
   existingPlayer: Player;
@@ -24,7 +24,7 @@ export class PlayerAddEditComponent implements OnInit {
     this.actionType = 'Add';
     this.formPlayerName = 'playerName';
     this.formCountry = 'country';
-    this.formPlayerWinnings = 0;
+    this.formPlayerWinnings = 'playerWinnings';
     if (this.avRoute.snapshot.params[idParam]) {
       this.playerId = this.avRoute.snapshot.params[idParam];
     }
@@ -60,9 +60,9 @@ export class PlayerAddEditComponent implements OnInit {
     if (this.actionType === 'Add') {
       let player: Player = {
         DateWon: new Date(),
-        playerName: this.form.get(this.formPlayerName).value,
-        country: this.form.get(this.formCountry).value,
-        playerWinnings: this.form.get(+this.formPlayerWinnings).value
+        PlayerName: this.form.get(this.formPlayerName).value,
+        Country: this.form.get(this.formCountry).value,
+        PlayerWinnings: this.form.get(this.formPlayerWinnings).value as number
       };
 
       this.playerService.savePlayer(player)
@@ -75,9 +75,9 @@ export class PlayerAddEditComponent implements OnInit {
       let player: Player = {
         PlayerId: this.existingPlayer.PlayerId,
         DateWon: this.existingPlayer.DateWon,
-        playerName: this.form.get(this.formPlayerName).value,
-        country: this.form.get(this.formCountry).value,
-        playerWinnings: this.formPlayerWinnings + this.form.get(this.formPlayerWinnings)
+        PlayerName: this.form.get(this.formPlayerName).value,
+        Country: this.form.get(this.formCountry).value,
+        PlayerWinnings: this.form.get(this.formPlayerWinnings).value as number
       };
       this.playerService.updatePlayer(player.PlayerId, player)
         .subscribe((data) => {
